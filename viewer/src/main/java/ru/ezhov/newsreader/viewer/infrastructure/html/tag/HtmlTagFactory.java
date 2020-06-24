@@ -1,22 +1,22 @@
 package ru.ezhov.newsreader.viewer.infrastructure.html.tag;
 
-import ru.ezhov.newsreader.core.feed.domain.Expression;
+import ru.ezhov.newsreader.core.feed.domain.ExpressionType;
 
 public abstract class HtmlTagFactory {
-    public static HtmlTag by(final Expression expression) {
+    public static HtmlTag by(final ExpressionType expressionType, final String value) {
         HtmlTag htmlTag;
-        switch (expression.type()) {
+        switch (expressionType) {
             case ENTITY:
-                htmlTag = new StrongTag(expression.value());
+                htmlTag = new StrongTag(value);
                 break;
             case LINK:
-                htmlTag = new SimpleATag(expression.value(), expression.value());
+                htmlTag = new SimpleATag(value, value);
                 break;
             case TWITTER_USERNAME:
-                htmlTag = new TwitterATag(expression.value());
+                htmlTag = new TwitterATag(value);
                 break;
             default:
-                htmlTag = new PlainTextTag(expression.value());
+                htmlTag = new PlainTextTag(value);
         }
         return htmlTag;
     }

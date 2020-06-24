@@ -9,6 +9,6 @@ class TwitterATag implements HtmlTag {
 
     @Override
     public String html() {
-        return "@<a href=\"http://twitter.com/" + text + "\">" + text + "</a>";
+        return "<a href=\"http://twitter.com/" + text + "\">" + text + "</a>";
     }
 }

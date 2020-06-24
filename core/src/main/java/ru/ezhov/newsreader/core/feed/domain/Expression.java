@@ -4,26 +4,23 @@ import java.util.Objects;
 
 public class Expression {
     private final ExpressionType expressionType;
-    private final String value;
+    private final Part part;
 
-    private Expression(final ExpressionType expressionType, final String value) {
+    private Expression(final ExpressionType expressionType, final Part part) {
         this.expressionType = expressionType;
-        this.value = value;
+        this.part = part;
     }
 
-    public static Expression create(final ExpressionType expressionType, final String value) throws ExpressionException {
-        if (expressionType == null || value == null || "".equals(value)) {
-            throw new ExpressionException("Для создания выражения обязательны тип выражения и значение");
-        }
-        return new Expression(expressionType, value);
+    public static Expression create(final ExpressionType expressionType, final Part part) {
+        return new Expression(expressionType, part);
     }
 
     public ExpressionType type() {
         return expressionType;
     }
 
-    public String value() {
-        return value;
+    public Part position() {
+        return part;
     }
 
     @Override
@@ -32,16 +29,11 @@ public class Expression {
         if (o == null || getClass() != o.getClass()) return false;
         Expression that = (Expression) o;
         return expressionType == that.expressionType &&
-                Objects.equals(value, that.value);
+                Objects.equals(part, that.part);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(expressionType, value);
-    }
-
-    @Override
-    public String toString() {
-        return value;
+        return Objects.hash(expressionType, part);
     }
 }

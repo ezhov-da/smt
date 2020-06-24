@@ -3,10 +3,13 @@ package ru.ezhov.newsreader.core.feed.infrastructure;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
+import ru.ezhov.newsreader.core.feed.domain.EndIndex;
 import ru.ezhov.newsreader.core.feed.domain.Expression;
 import ru.ezhov.newsreader.core.feed.domain.ExpressionType;
 import ru.ezhov.newsreader.core.feed.domain.Feed;
+import ru.ezhov.newsreader.core.feed.domain.Part;
 import ru.ezhov.newsreader.core.feed.domain.RawFeed;
+import ru.ezhov.newsreader.core.feed.domain.StartIndex;
 
 import java.util.List;
 
@@ -20,12 +23,10 @@ public class DefaultFeedParserTest {
         final List<Expression> expressions = feed.expressions();
         assertThat(expressions)
                 .containsSequence(
-                        Expression.create(ExpressionType.ENTITY, "Obama"),
-                        Expression.create(ExpressionType.PLAIN_TEXT, "visited"),
-                        Expression.create(ExpressionType.ENTITY, "Facebook"),
-                        Expression.create(ExpressionType.PLAIN_TEXT, "headquarters:"),
-                        Expression.create(ExpressionType.LINK, "http://bit.ly/xyz"),
-                        Expression.create(ExpressionType.TWITTER_USERNAME, "elversatile")
+                        Expression.create(ExpressionType.ENTITY, Part.create(StartIndex.create(0), EndIndex.create(4))),
+                        Expression.create(ExpressionType.ENTITY, Part.create(StartIndex.create(14), EndIndex.create(21))),
+                        Expression.create(ExpressionType.LINK, Part.create(StartIndex.create(37), EndIndex.create(53))),
+                        Expression.create(ExpressionType.TWITTER_USERNAME, Part.create(StartIndex.create(56), EndIndex.create(68)))
                 );
     }
 }
